@@ -8,16 +8,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
-    res.send(`
-        <html>
-            <body>
-                <form action="/weather/location">
-                    <input type="text" placeholder='Name', name="name">
-                    <input type="submit" value="Submit">
-                </form>
-            </body>
-        </html>
-    `);
+    res.render('landing');
 });
 
 router.get("/location", async (req, res, next) => {
