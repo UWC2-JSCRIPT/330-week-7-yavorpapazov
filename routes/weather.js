@@ -14,10 +14,17 @@ router.get("/", async (req, res, next) => {
 router.get("/location", async (req, res, next) => {
     const { name } = req.query;
     const item = await weatherDAO.getById(name);
-    const data = {
-        location: item.name, temperature: item.temperature
+    if (name === '') {
+        return res.status(302).redirect('/weather')
     }
-    res.render('index', { locationData: data });
+    if (!item) {
+        res.status(404).render('error', { location: name });
+    } else {
+        const data = {
+            location: item.name, temperature: item.temperature
+        }
+        res.render('index', { locationData: data });
+    } 
 });
 
 module.exports = router;
